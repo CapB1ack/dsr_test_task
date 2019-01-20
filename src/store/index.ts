@@ -1,21 +1,14 @@
-import {applyMiddleware, combineReducers, createStore, Store} from 'redux';
+import {applyMiddleware, createStore, Store} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {IAppState} from 'src/store/model';
+import {rootReducer} from 'src/store/reducer';
 
-const xxxReducer = () => {
-    return true;
-};
+export function configureStore(): Store<IAppState> {
+  let middleware = applyMiddleware();
 
-export const rootReducer = combineReducers<IAppState>({
-    xxx: xxxReducer
-});
+  if (process.env.NODE_ENV !== 'production') {
+    middleware = composeWithDevTools(middleware);
+  }
 
-export function configureStore(initialState?: IAppState): Store<IAppState> {
-    let middleware = applyMiddleware();
-
-    if (process.env.NODE_ENV !== 'production') {
-        middleware = composeWithDevTools(middleware);
-    }
-
-    return createStore(rootReducer as any, initialState as any, middleware) as Store<IAppState>;
+  return createStore(rootReducer as any, void 0, middleware) as Store<IAppState>;
 }

@@ -1,0 +1,16 @@
+.Tracker {
+  width: 100%;
+  border: 1px solid $color-black;
+  display: flex;
+  align-items: center;
+  padding: 1em;
+
+  &__button {
+    flex-basis: 25%;
+  }
+
+  &__info {
+    flex-basis: 75%;
+    @include flex-col-center-center;
+  }
+}

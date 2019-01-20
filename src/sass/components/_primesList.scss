@@ -1,0 +1,12 @@
+.PrimesList {
+  width: 60vw;
+
+  &__scroll {
+    height: 60vh;
+    border: 1px solid $color-black;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+  }
+}

@@ -1,0 +1,17 @@
+.PrimeNumber {
+  padding: .5em;
+  height: 5em;
+  flex-basis: 25%;
+  cursor: pointer;
+
+  &__value {
+    border: 1px solid $color-black;
+    width: 100%;
+    height: 100%;
+    @include flex-col-center-center;
+  }
+
+  &__active {
+    background-color: red;
+  }
+}

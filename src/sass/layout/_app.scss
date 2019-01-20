@@ -1,0 +1,18 @@
+.App {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 2em;
+  font-size: 2rem;
+
+  &__tracker {
+    width: 60vw;
+  }
+
+  &__body {
+    display: flex;
+    justify-content: space-between;
+  }
+}
