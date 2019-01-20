@@ -8,16 +8,28 @@ export interface IAction {
 export enum EArticlesActions {
   START_CALCULATION = 'START_CALCULATION',
   SELECT_PRIME_NUMBER = 'SELECT_PRIME_NUMBER',
-  FOUNDED_PRIME = 'FOUNDED_PRIME'
+  FOUNDED_THOUSANDS_PRIME = 'FOUNDED_THOUSANDS_PRIME',
+  HIDE_NOTIFICATION = 'HIDE_NOTIFICATION'
 }
 
 export interface IActions {
   /**
    * Sets start time and runs calculations.
+   * @param {number} startTimestamp
    */
   startCalculations(startTimestamp: number): void;
 
+  /**
+   * Sets selected prime number;
+   * @param {number} primeNumber
+   */
   selectPrimeNumber(primeNumber: number): void;
+
+  /**
+   * Hide prime inside notifications;
+   * @param {number} primeNumber
+   */
+  hideNotification(primeNumber: number): void;
 }
 
 export class Actions implements IActions {
@@ -36,5 +48,12 @@ export class Actions implements IActions {
       payload: primeNumber,
       type: EArticlesActions.SELECT_PRIME_NUMBER
     })
-  }
+  };
+
+  public hideNotification = (primeNumber: number) => {
+    this.dispatch({
+      payload: primeNumber,
+      type: EArticlesActions.HIDE_NOTIFICATION
+    })
+  };
 }

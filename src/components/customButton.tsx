@@ -7,7 +7,6 @@ interface IProps {
 }
 
 export const CustomButton = ({label, onClick, disabled}: IProps) => {
-
   return (
     <button className="CustomButton" onClick={onClick} disabled={disabled}>
       {label}

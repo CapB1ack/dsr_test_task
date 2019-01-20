@@ -1,0 +1,10 @@
+.Notification {
+  height: 2em;
+  padding: .5em;
+  border: 1px solid $color-black;
+  margin-bottom: 1em;
+  font-size: 1.5rem;
+  cursor: pointer;
+
+  @include flex-row-center-center;
+}

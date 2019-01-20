@@ -2,16 +2,20 @@ import {handleActions} from 'redux-actions';
 import {store} from 'src';
 import {EArticlesActions, IAction} from 'src/store/actions';
 import {IAppState} from 'src/store/model';
+import {OffsetGenerator} from 'src/utils/offsetGenerator';
+import {getTimeDistance} from 'src/utils/timeUtils';
 import {WebWorkerFactory} from 'src/worker';
 import primesWorker from 'src/worker/primesWorker';
 
 const worker: any = new WebWorkerFactory(primesWorker);
 worker.addEventListener('message', (event: any) => {
   store.dispatch({
-    payload: event.data,
-    type: EArticlesActions.FOUNDED_PRIME
+    payload: event.data.payload,
+    type: event.data.type
   })
 });
+
+const gen: IterableIterator<number> = OffsetGenerator();
 
 const initialState: IAppState = {
   primes: {},
@@ -29,27 +33,39 @@ export const rootReducer = handleActions<IAppState>({
       startTimestamp: action.payload
     });
   },
-  [EArticlesActions.FOUNDED_PRIME]: (state: IAppState, action: IAction) => {
-    const newPrime: number = action.payload;
+  [EArticlesActions.FOUNDED_THOUSANDS_PRIME]: (state: IAppState, action: IAction) => {
+    const newPrime: number = action.payload.newPrime;
     return {
       ...state,
       primes: {
         ...state.primes,
         [newPrime]: {
-          calculationDuration: Date.now() - (state.startTimestamp as number),
+          calculationDuration: getTimeDistance(state.startTimestamp as number),
           isHidden: false,
+          offset: gen.next().value,
           value: newPrime
         }
       },
       primesOrder: [...state.primesOrder, newPrime],
-      sumOfFoundedPrimes: state.sumOfFoundedPrimes + newPrime
+      sumOfFoundedPrimes: action.payload.primesSum
     };
   },
-  [EArticlesActions.SELECT_PRIME_NUMBER]: (state: IAppState, action: IAction) => {
-    return ({
+  [EArticlesActions.SELECT_PRIME_NUMBER]: (state: IAppState, action: IAction) => ({
+    ...state,
+    selectedPrime: action.payload
+  }),
+  [EArticlesActions.HIDE_NOTIFICATION]: (state: IAppState, action: IAction) => {
+    const primeNumber = action.payload;
+    const oldPrime = state.primes[primeNumber];
+    return {
       ...state,
-      selectedPrime: action.payload
-    });
+      primes: {
+        ...state.primes,
+        [primeNumber]: {
+          ...oldPrime,
+          isHidden: true
+        }
+      }
+    };
   },
-
 }, initialState);

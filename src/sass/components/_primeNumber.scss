@@ -3,15 +3,53 @@
   height: 5em;
   flex-basis: 25%;
   cursor: pointer;
+  position: relative;
 
   &__value {
     border: 1px solid $color-black;
     width: 100%;
     height: 100%;
+    font-weight: bold;
     @include flex-col-center-center;
   }
 
-  &__active {
-    background-color: red;
+  &__info {
+    position: absolute;
+    display: flex;
+    bottom: .5em;
+    margin-left: .5em;
+    left: -300%;
+    width: 57.4vw;
+    height: 4em;
+    border: 1px solid $color-black;
+
+    &--prime {
+      flex-basis: 40%;
+      border-right: 1px solid $color-black;
+      @include flex-col-center-center;
+    }
+
+    &--time {
+      flex-basis: 60%;
+      @include flex-col-center-center;
+    }
   }
+
+  &__arrow {
+    @include flex-row-center-center;
+  }
+}
+
+.PrimeNumber.active {
+  padding: .5em;
+  height: 10em;
+  flex-basis: 25%;
+  cursor: pointer;
+}
+
+.PrimeNumber.active .PrimeNumber__value {
+  border: 1px solid $color-black;
+  width: 100%;
+  height: 4em;
+  @include flex-col-center-center;
 }

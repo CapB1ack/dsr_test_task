@@ -1,13 +1,14 @@
 import * as React from 'react';
 import {PrimeNumber} from 'src/components/primeNumber';
+import {IPrimes} from 'src/store/model';
 
 interface IProps {
+  primes: IPrimes;
   primesOrder: number[];
   selectedPrime: number | null;
   onPrimeNumberSelect: (primeNumber: number) => void;
 }
-export const PrimesList = ({primesOrder, onPrimeNumberSelect, selectedPrime}: IProps) => {
-
+export const PrimesList = ({primesOrder, onPrimeNumberSelect, selectedPrime, primes}: IProps) => {
   const handlePrimeNumber = (primeNumber: number) => () => onPrimeNumberSelect(primeNumber);
 
   return (
@@ -19,6 +20,8 @@ export const PrimesList = ({primesOrder, onPrimeNumberSelect, selectedPrime}: IP
           value={prime}
           onClick={handlePrimeNumber(prime)}
           selectedPrime={selectedPrime}
+          offset={primes[prime].offset}
+          calculationDuration={primes[prime].calculationDuration}
         />)}
       </div>
     </div>
