@@ -19,9 +19,13 @@
     bottom: .5em;
     margin-left: .5em;
     left: -300%;
-    width: 57.4vw;
+    width: 58vw;
     height: 4em;
     border: 1px solid $color-black;
+
+    @media only screen and (max-width: 85.5em) {
+      width: 57.4vw;
+    }
 
     &--prime {
       flex-basis: 40%;

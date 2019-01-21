@@ -1,5 +1,14 @@
 import * as React from 'react';
 
+/**
+ * Components props.
+ *
+ * {number} offset Offset of prime number element inside layout. Used as absolute position.
+ * {number} value  Value of prime number;
+ * {string} calculationDuration  Duration from start calc till prime number was found.
+ * {Function} onClick PrimeNumber click handler
+ * {number | null} selectedPrime Selected prime number.
+ */
 interface IProps {
   offset: number;
   value: number;

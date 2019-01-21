@@ -2,6 +2,14 @@ import * as React from 'react';
 import {PrimeNumber} from 'src/components/primeNumber';
 import {IPrimes} from 'src/store/model';
 
+/**
+ * Components props.
+ *
+ * {IPrimes} primes Hash of primes.
+ * {number[]} primesOrder Order of founded primes.
+ * {number | null} selectedPrime Selected prime.
+ * {Function} onPrimeNumberSelect Callback for selecting prime.
+ */
 interface IProps {
   primes: IPrimes;
   primesOrder: number[];

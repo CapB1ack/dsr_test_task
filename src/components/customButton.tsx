@@ -1,5 +1,12 @@
 import * as React from 'react';
 
+/**
+ * CustomButton props.
+ *
+ * {string} label Text inside button.
+ * {Function} onClick Click handler.
+ * {boolean} disabled Disable button.
+ */
 interface IProps {
   label: string;
   onClick:() => void;
